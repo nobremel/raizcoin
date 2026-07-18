@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histórico — RaizCoin</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="firebase.js"></script>
+</head>
+
+<body>
+
+<header>
+    <h1>Histórico</h1>
+    <nav>
+        <ul>
+            <li><a href="carteira.html">Carteira</a></li>
+            <li><a href="historico.html">Histórico</a></li>
+            <li><a href="ganhardois.html">Ganhar</a></li>
+            <li><a href="raizcoin_index.html">Início</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section class="info-section">
+        <h2>Ações Realizadas</h2>
+        <ul id="lista-historico"></ul>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2024 Mundo Raiz</p>
+</footer>
+
+<script type="module">
+    import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+
+    async function carregarHistorico() {
+        const db = window.db;
+        const ref = doc(db, "users", "mario");
+        const snap = await getDoc(ref);
+
+        if (snap.exists()) {
+            const historico = snap.data().historico || [];
+            const lista = document.getElementById("lista-historico");
+            lista.innerHTML = "";
+
+            historico.forEach(item => {
+                const li = document.createElement("li");
+                li.innerText = item;
+                lista.appendChild(li);
+            });
+        } else {
+            document.getElementById("lista-historico").innerText =
+                "Erro ao carregar histórico.";
+        }
+    }
+
+    carregarHistorico();
+</script>
+
+</body>
+</html>
