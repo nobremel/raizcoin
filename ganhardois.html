@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ganhar RC</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="firebase.js"></script>
+</head>
+
+<body>
+
+<header>
+    <h1>Ganhar RC</h1>
+    <nav>
+        <ul>
+            <li><a href="carteira.html">Carteira</a></li>
+            <li><a href="historico.html">Histórico</a></li>
+            <li><a href="ganhardois.html">Ganhar</a></li>
+            <li><a href="raizcoin_index.html">Início</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section class="info-section">
+        <h2>Missões rápidas</h2>
+        <p>Clica numa ação para ganhar RaizCoin.</p>
+
+        <button class="action-btn" onclick="ganhar(5)">Explorar um espaço (+5 RC)</button>
+        <button class="action-btn" onclick="ganhar(10)">Completar um ritual (+10 RC)</button>
+        <button class="action-btn" onclick="ganhar(20)">Descoberta especial (+20 RC)</button>
+
+        <p id="feedback" style="margin-top:20px; font-weight:bold;"></p>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2024 Mundo Raiz</p>
+</footer>
+
+<script type="module">
+    import { doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+
+    async function ganhar(valor) {
+        const db = window.db;
+        const ref = doc(db, "users", "mario");
+        const snap = await getDoc(ref);
+
+        if (snap.exists()) {
+            const saldoAtual = snap.data().saldo;
+            const novoSaldo = saldoAtual + valor;
+
+            await updateDoc(ref, { saldo: novoSaldo });
+
+            document.getElementById("feedback").innerText =
+                "Ganhaste +" + valor + " RC! Novo saldo: " + novoSaldo + " RC";
+        } else {
+            document.getElementById("feedback").innerText =
+                "Erro: utilizador não encontrado.";
+        }
+    }
+</script>
+
+</body>
+</html>
