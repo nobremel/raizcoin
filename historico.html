@@ -5,60 +5,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Histórico — RaizCoin</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="firebase.js"></script>
 </head>
 
 <body>
 
-<header>
-    <h1>Histórico</h1>
-    <nav>
-        <ul>
-            <li><a href="carteira.html">Carteira</a></li>
-            <li><a href="historico.html">Histórico</a></li>
-            <li><a href="ganhardois.html">Ganhar</a></li>
-            <li><a href="raizcoin_index.html">Início</a></li>
-        </ul>
-    </nav>
-</header>
+    <header>
+        <h1>Histórico</h1>
+        <nav>
+            <a href="raizcoin_index.html">Início</a>
+            <a href="carteira.html">Carteira</a>
+            <a href="historico.html" class="active">Histórico</a>
+            <a href="ganhardois.html">Ganhar</a>
+        </nav>
+    </header>
 
-<main>
     <section class="info-section">
-        <h2>Ações Realizadas</h2>
+        <h2>Movimentos</h2>
+        <p id="loading">A carregar histórico…</p>
         <ul id="lista-historico"></ul>
     </section>
-</main>
 
-<footer>
-    <p>&copy; 2024 Mundo Raiz</p>
-</footer>
+    <footer>
+        <p>© 2024 Mundo Raiz</p>
+    </footer>
 
-<script type="module">
-    import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+    <!-- Firebase config -->
+    <script src="firebase.js"></script>
 
-    async function carregarHistorico() {
-        const db = window.db;
-        const ref = doc(db, "users", "mario");
-        const snap = await getDoc(ref);
+    <!-- Firebase + leitura do histórico -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, getDocs, orderBy, query } 
+            from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        if (snap.exists()) {
-            const historico = snap.data().historico || [];
+        const firebaseConfig = {
+            apiKey: "AIzaSyD1JxgT8Qm2W0p4uHkGgkMZpQ0zVvYt1x0",
+            authDomain: "mundoraiz-e8e08.firebaseapp.com",
+            projectId: "mundoraiz-e8e08",
+            storageBucket: "mundoraiz-e8e08.appspot.com",
+            messagingSenderId: "1029384756",
+            appId: "1:1029384756:web:abcdef123456"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function carregarHistorico() {
+            const historicoRef = collection(db, "users", "mario", "historico");
+            const q = query(historicoRef, orderBy("timestamp", "desc"));
+
+            const snap = await getDocs(q);
+
             const lista = document.getElementById("lista-historico");
-            lista.innerHTML = "";
+            const loading = document.getElementById("loading");
 
-            historico.forEach(item => {
-                const li = document.createElement("li");
-                li.innerText = item;
-                lista.appendChild(li);
+            loading.style.display = "none";
+
+            if (snap.empty) {
+                lista.innerHTML = "<li>Nenhum movimento registado ainda.</li>";
+                return;
+            }
+
+            snap.forEach(doc => {
+                const dados = doc.data();
+                const valor = dados.valor;
+                const tipo = dados.tipo;
+                const data = dados.timestamp.toDate();
+
+                const item = document.createElement("li");
+                item.innerHTML = `
+                    <strong>${tipo === "ganho" ? "Ganho" : "Movimento"}</strong>:
+                    +${valor} RC  
+                    <br>
+                    <span class="data">${data.toLocaleString("pt-PT")}</span>
+                `;
+                lista.appendChild(item);
             });
-        } else {
-            document.getElementById("lista-historico").innerText =
-                "Erro ao carregar histórico.";
         }
-    }
 
-    carregarHistorico();
-</script>
+        carregarHistorico();
+    </script>
 
 </body>
 </html>
