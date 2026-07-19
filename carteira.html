@@ -5,51 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carteira — RaizCoin</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="firebase.js"></script>
 </head>
 
 <body>
 
-<header>
-    <h1>Carteira</h1>
-    <nav>
-        <ul>
-            <li><a href="carteira.html">Carteira</a></li>
-            <li><a href="historico.html">Historico</a></li>
-            <li><a href="ganhardois.html">Ganhar</a></li>
-            <li><a href="raizcoin_index.html">Início</a></li>
-        </ul>
-    </nav>
-</header>
+    <header>
+        <h1>Carteira</h1>
+        <nav>
+            <a href="raizcoin_index.html">Início</a>
+            <a href="carteira.html" class="active">Carteira</a>
+            <a href="historico.html">Histórico</a>
+            <a href="ganhardois.html">Ganhar</a>
+        </nav>
+    </header>
 
-<main>
     <section class="info-section">
         <h2>Saldo Atual</h2>
-        <p id="saldo">A carregar saldo...</p>
+        <p id="saldo">A carregar saldo…</p>
     </section>
-</main>
 
-<footer>
-    <p>&copy; 2024 Mundo Raiz</p>
-</footer>
+    <footer>
+        <p>© 2024 Mundo Raiz</p>
+    </footer>
 
-<script type="module">
-    import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+    <!-- Firebase config -->
+    <script src="firebase.js"></script>
 
-    async function carregarSaldo() {
-        const db = window.db;
-        const ref = doc(db, "users", "mario");
-        const snap = await getDoc(ref);
+    <!-- Firebase + leitura do saldo -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, doc, getDoc } 
+            from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        if (snap.exists()) {
-            document.getElementById("saldo").innerText = snap.data().saldo + " RC";
-        } else {
-            document.getElementById("saldo").innerText = "Erro ao carregar saldo.";
+        const firebaseConfig = {
+            apiKey: "AIzaSyD1JxgT8Qm2W0p4uHkGgkMZpQ0zVvYt1x0",
+            authDomain: "mundoraiz-e8e08.firebaseapp.com",
+            projectId: "mundoraiz-e8e08",
+            storageBucket: "mundoraiz-e8e08.appspot.com",
+            messagingSenderId: "1029384756",
+            appId: "1:1029384756:web:abcdef123456"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function carregarSaldo() {
+            const userRef = doc(db, "users", "mario");
+            const snap = await getDoc(userRef);
+
+            const saldo = snap.data().saldo || 0;
+
+            document.getElementById("saldo").innerText = `${saldo} RC`;
         }
-    }
 
-    carregarSaldo();
-</script>
+        carregarSaldo();
+    </script>
 
 </body>
 </html>
+
