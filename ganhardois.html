@@ -5,62 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ganhar RC</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="firebase.js"></script>
 </head>
 
 <body>
 
-<header>
-    <h1>Ganhar RC</h1>
-    <nav>
-        <ul>
-            <li><a href="carteira.html">Carteira</a></li>
-            <li><a href="historico.html">Histórico</a></li>
-            <li><a href="ganhardois.html">Ganhar</a></li>
-            <li><a href="raizcoin_index.html">Início</a></li>
-        </ul>
-    </nav>
-</header>
+    <header>
+        <h1>Ganhar RC</h1>
+        <nav>
+            <a href="raizcoin_index.html">Início</a>
+            <a href="carteira.html">Carteira</a>
+            <a href="historico.html">Histórico</a>
+            <a href="ganhardois.html" class="active">Ganhar</a>
+        </nav>
+    </header>
 
-<main>
     <section class="info-section">
         <h2>Missões rápidas</h2>
-        <p>Clica numa ação para ganhar RaizCoin.</p>
 
-        <button class="action-btn" onclick="ganhar(5)">Explorar um espaço (+5 RC)</button>
-        <button class="action-btn" onclick="ganhar(10)">Completar um ritual (+10 RC)</button>
-        <button class="action-btn" onclick="ganhar(20)">Descoberta especial (+20 RC)</button>
+        <button onclick="ganhar(5)">Explorar um espaço (+5 RC)</button>
+        <button onclick="ganhar(10)">Completar um ritual (+10 RC)</button>
+        <button onclick="ganhar(20)">Descoberta especial (+20 RC)</button>
 
-        <p id="feedback" style="margin-top:20px; font-weight:bold;"></p>
+        <p id="feedback" class="feedback"></p>
     </section>
-</main>
 
-<footer>
-    <p>&copy; 2024 Mundo Raiz</p>
-</footer>
+    <footer>
+        <p>© 2024 Mundo Raiz</p>
+    </footer>
 
-<script type="module">
-    import { doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+    <!-- Firebase config -->
+    <script src="firebase.js"></script>
 
-    async function ganhar(valor) {
-        const db = window.db;
-        const ref = doc(db, "users", "mario");
-        const snap = await getDoc(ref);
+    <!-- Firebase + lógica -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, doc, updateDoc, getDoc, addDoc, collection } 
+            from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        if (snap.exists()) {
-            const saldoAtual = snap.data().saldo;
-            const novoSaldo = saldoAtual + valor;
+        const firebaseConfig = {
+            apiKey: "AIzaSyD1JxgT8Qm2W0p4uHkGgkMZpQ0zVvYt1x0",
+            authDomain: "mundoraiz-e8e08.firebaseapp.com",
+            projectId: "mundoraiz-e8e08",
+            storageBucket: "mundoraiz-e8e08.appspot.com",
+            messagingSenderId: "1029384756",
+            appId: "1:1029384756:web:abcdef123456"
+        };
 
-            await updateDoc(ref, { saldo: novoSaldo });
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function ganhar(valor) {
+            const userRef = doc(db, "users", "mario");
+
+            const snap = await getDoc(userRef);
+            const saldoAtual = snap.data().saldo || 0;
+
+            await updateDoc(userRef, { saldo: saldoAtual + valor });
+
+            await addDoc(collection(db, "users", "mario", "historico"), {
+                tipo: "ganho",
+                valor: valor,
+                timestamp: new Date()
+            });
 
             document.getElementById("feedback").innerText =
-                "Ganhaste +" + valor + " RC! Novo saldo: " + novoSaldo + " RC";
-        } else {
-            document.getElementById("feedback").innerText =
-                "Erro: utilizador não encontrado.";
+                `Ganhaste +${valor} RC!`;
         }
-    }
-</script>
+
+        window.ganhar = ganhar;
+    </script>
 
 </body>
 </html>
+
