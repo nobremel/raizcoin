@@ -1,9 +1,10 @@
 import admin from "firebase-admin";
 
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+
 if (!admin.apps.length) {
   admin.initializeApp({
-    credential: admin.credential.applicationDefault(),
-    projectId: "mundoraiz-e8e08"
+    credential: admin.credential.cert(serviceAccount)
   });
 }
 
@@ -40,5 +41,6 @@ export async function handler(event, context) {
     body: "Missão registada com sucesso"
   };
 }
+
 
 
