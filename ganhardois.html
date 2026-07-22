@@ -22,59 +22,35 @@
     <section class="info-section">
         <h2>Missões rápidas</h2>
 
-        <button onclick="ganhar(5)">Explorar um espaço (+5 RC)</button>
-        <button onclick="ganhar(10)">Completar um ritual (+10 RC)</button>
-        <button onclick="ganhar(20)">Descoberta especial (+20 RC)</button>
+        <p class="missao-info">
+            <strong>Explorar um espaço</strong><br>
+            Recompensa: <strong>+5 RC</strong><br>
+            Esta missão é concluída automaticamente quando visitas um espaço no Metasteps.
+        </p>
 
-        <p id="feedback" class="feedback"></p>
+        <p class="missao-info">
+            <strong>Completar um ritual</strong><br>
+            Recompensa: <strong>+10 RC</strong><br>
+            Esta missão é concluída automaticamente quando completas um ritual no Genially.
+        </p>
+
+        <p class="missao-info">
+            <strong>Descoberta especial</strong><br>
+            Recompensa: <strong>+20 RC</strong><br>
+            Esta missão é concluída automaticamente quando realizas uma descoberta no Metasteps.
+        </p>
+
+        <p class="feedback">
+            Os ganhos são registados automaticamente na carteira e no histórico,
+            assim que completas as missões no Metasteps ou no Genially.
+        </p>
     </section>
 
     <footer>
         <p>© 2024 Mundo Raiz</p>
     </footer>
 
-    <!-- Firebase config -->
-    <script src="firebase.js"></script>
-
-    <!-- Firebase + lógica -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, doc, updateDoc, getDoc, addDoc, collection } 
-            from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyD1JxgT8Qm2W0p4uHkGgkMZpQ0zVvYt1x0",
-            authDomain: "mundoraiz-e8e08.firebaseapp.com",
-            projectId: "mundoraiz-e8e08",
-            storageBucket: "mundoraiz-e8e08.appspot.com",
-            messagingSenderId: "1029384756",
-            appId: "1:1029384756:web:abcdef123456"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        async function ganhar(valor) {
-            const userRef = doc(db, "users", "mario");
-
-            const snap = await getDoc(userRef);
-            const saldoAtual = snap.data().saldo || 0;
-
-            await updateDoc(userRef, { saldo: saldoAtual + valor });
-
-            await addDoc(collection(db, "users", "mario", "historico"), {
-                tipo: "ganho",
-                valor: valor,
-                timestamp: new Date()
-            });
-
-            document.getElementById("feedback").innerText =
-                `Ganhaste +${valor} RC!`;
-        }
-
-        window.ganhar = ganhar;
-    </script>
-
 </body>
 </html>
+
 
