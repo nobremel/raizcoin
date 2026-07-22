@@ -29,4 +29,4 @@ module.exports = async (req, res) => {
     });
 
   return res.status(200).send("Missão registada com sucesso");
-};
+}; 
