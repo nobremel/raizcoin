@@ -1,6 +1,6 @@
-import admin from "firebase-admin";
+const admin = require("firebase-admin");
 
-const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+const serviceAccount = JSON.parse(process.env.firebase_service_account);
 
 if (!admin.apps.length) {
   admin.initializeApp({
@@ -10,9 +10,8 @@ if (!admin.apps.length) {
 
 const db = admin.firestore();
 
-export default async function handler(req, res) {
+module.exports = async (req, res) => {
   const { id, user, token } = req.query;
-
   const TOKEN_SECRETO = "RAIZ-SECRETO-2024";
 
   if (token !== TOKEN_SECRETO) {
@@ -30,4 +29,4 @@ export default async function handler(req, res) {
     });
 
   return res.status(200).send("Missão registada com sucesso");
-}
+};
