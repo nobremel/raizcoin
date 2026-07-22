@@ -1,18 +1,13 @@
-import { initializeApp } from "firebase/app";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
+import admin from "firebase-admin";
 
-// ⚠️ Usa a tua config real do firebase.js
-const firebaseConfig = {
-  apiKey: "AIzaSyD1JxgT8Qm2W0p4uHkGgkMZpQ0zVvYt1x0",
-  authDomain: "mundoraiz-e8e08.firebaseapp.com",
-  projectId: "mundoraiz-e8e08",
-  storageBucket: "mundoraiz-e8e08.appspot.com",
-  messagingSenderId: "1029384756",
-  appId: "1:1029384756:web:abcdef123456"
-};
+if (!admin.apps.length) {
+  admin.initializeApp({
+    credential: admin.credential.applicationDefault(),
+    projectId: "mundoraiz-e8e08"
+  });
+}
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+const db = admin.firestore();
 
 export async function handler(event, context) {
   const params = event.queryStringParameters;
@@ -30,14 +25,20 @@ export async function handler(event, context) {
     };
   }
 
-  await setDoc(doc(db, "users", user, "missoes", missao), {
-    cumprida: true,
-    timestamp: new Date()
-  });
+  await db
+    .collection("users")
+    .doc(user)
+    .collection("missoes")
+    .doc(missao)
+    .set({
+      cumprida: true,
+      timestamp: new Date()
+    });
 
   return {
     statusCode: 200,
     body: "Missão registada com sucesso"
   };
 }
+
 
