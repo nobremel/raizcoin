@@ -1,62 +1,109 @@
+/* ------------------------------
+   🌿 Natureza Viva — Mundo Raiz
+   Layout suave, natural e lúdico
+   Ideal para crianças até 12 anos
+--------------------------------*/
+
+/* Fonte amigável e suave */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Nunito', sans-serif;
+    background: #F3F8F2; /* verde muito claro */
+    color: #3E4A3D; /* verde profundo */
     margin: 0;
     padding: 0;
-    background: #f4f4f4;
 }
 
+/* ------------------------------
+   🌿 Cabeçalho e Navegação
+--------------------------------*/
 header {
-    background: #333;
-    color: white;
-    padding: 15px;
+    background: #A3C9A8; /* verde suave */
+    padding: 20px;
     text-align: center;
-}
-
-nav ul {
-    list-style: none;
-    padding: 0;
-}
-
-nav ul li {
-    display: inline-block;
-    margin: 0 10px;
+    color: #ffffff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 nav a {
-    color: white;
+    margin: 0 15px;
+    color: #ffffff;
     text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    position: relative;
+    padding-bottom: 4px;
 }
 
+nav a:hover {
+    color: #F9F871; /* amarelo suave */
+}
+
+nav a:hover::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #F9F871;
+    border-radius: 2px;
+}
+
+/* ------------------------------
+   🌿 Secção de Informação
+--------------------------------*/
 .info-section {
-    padding: 20px;
-    text-align: center;
-}
-
-.card-grid {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+    max-width: 800px;
+    margin: 40px auto;
     padding: 20px;
 }
 
-.card {
-    background: white;
+/* ------------------------------
+   🌿 Cartões de Missão
+--------------------------------*/
+.missao-info {
+    background: #ffffff;
+    border: 2px solid #D7E8D4; /* verde pastel */
+    border-radius: 16px;
     padding: 20px;
-    border-radius: 8px;
-    width: 200px;
-    text-align: center;
-    text-decoration: none;
-    color: black;
-    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    margin-bottom: 25px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    position: relative;
 }
 
-.action-btn {
-    display: block;
-    margin: 10px auto;
-    padding: 10px 20px;
-    background: #008000;
+/* Ícone decorativo */
+.missao-info::before {
+    content: "🌱"; /* ícone natureza */
+    font-size: 28px;
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    background: #A3C9A8;
     color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
 }
+
+.missao-info:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
+/* Títulos das missões */
+.missao-info h3 {
+    margin-top: 0;
+    color: #3E4A3D;
+    font-size: 22px;
+}
+
+/* Texto */
+.missao-info p {
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+/* ------------------------------
+   🌿 Rodapé
+--------------------------------
