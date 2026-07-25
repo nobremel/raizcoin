@@ -3,30 +3,15 @@
    Layout suave, natural e lúdico
 --------------------------------*/
 
-/* Fundo natural suave com animação */
 body {
     font-family: 'Nunito', sans-serif;
     background: #F3F8F2 url('https://www.toptal.com/designers/subtlepatterns/uploads/paper.png');
     background-size: 600px;
+    background-attachment: fixed; /* parallax suave */
+    background-position: center top;
     color: #3E4A3D;
     margin: 0;
     padding: 0;
-
-    /* animação suave */
-    animation: fundoRespirar 18s ease-in-out infinite;
-}
-
-/* Movimento orgânico, muito suave */
-@keyframes fundoRespirar {
-    0% {
-        background-position: 0px 0px;
-    }
-    50% {
-        background-position: 20px 15px;
-    }
-    100% {
-        background-position: 0px 0px;
-    }
 }
 
 /* ------------------------------
