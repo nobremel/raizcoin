@@ -59,8 +59,66 @@ nav a:hover::after {
 }
 
 /* ------------------------------
-   🌿 Cartões de Missão
+   🌿 Cartões da Página Inicial
 --------------------------------*/
+
+.home-card {
+    background: #ffffff;
+    border: 2px solid #D7E8D4; /* verde pastel */
+    border-radius: 16px;
+    padding: 25px;
+    margin: 20px 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    position: relative;
+    cursor: pointer;
+}
+
+/* Ícones para cada cartão da página inicial */
+.home-card:nth-of-type(1)::before {
+    content: "💰"; /* Carteira */
+}
+
+.home-card:nth-of-type(2)::before {
+    content: "🌿"; /* Ganhar RC */
+}
+
+.home-card:nth-of-type(3)::before {
+    content: "📜"; /* Histórico */
+}
+
+.home-card::before {
+    font-size: 28px;
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    background: #A3C9A8;
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+}
+
+.home-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
+.home-card h3 {
+    margin-top: 0;
+    color: #3E4A3D;
+    font-size: 22px;
+}
+
+.home-card p {
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+/* ------------------------------
+   🌿 Cartões de Missão (Página Ganhar)
+--------------------------------*/
+
 .missao-info {
     background: #ffffff;
     border: 2px solid #D7E8D4; /* verde pastel */
@@ -72,9 +130,9 @@ nav a:hover::after {
     position: relative;
 }
 
-/* Ícone decorativo */
+/* Ícone decorativo padrão (será substituído abaixo) */
 .missao-info::before {
-    content: "🌱"; /* ícone padrão (será substituído abaixo) */
+    content: "🌱"; /* ícone padrão */
     font-size: 28px;
     position: absolute;
     top: -14px;
@@ -91,14 +149,12 @@ nav a:hover::after {
     box-shadow: 0 6px 16px rgba(0,0,0,0.12);
 }
 
-/* Títulos das missões */
 .missao-info h3 {
     margin-top: 0;
     color: #3E4A3D;
     font-size: 22px;
 }
 
-/* Texto */
 .missao-info p {
     font-size: 18px;
     line-height: 1.5;
