@@ -59,6 +59,17 @@ nav a:hover::after {
 }
 
 /* ------------------------------
+   🌿 Ícone oficial RaizCoin
+--------------------------------*/
+.raizcoin-icon {
+    width: 32px;
+    height: 32px;
+    background-image: url('https://nobremel.github.io/raizcoin.svg');
+    background-size: cover;
+    display: inline-block;
+}
+
+/* ------------------------------
    🌿 Cartões da Página Inicial
 --------------------------------*/
 
@@ -74,26 +85,17 @@ nav a:hover::after {
     cursor: pointer;
 }
 
-/* Ícones para cada cartão da página inicial */
-.home-card:nth-of-type(1)::before {
-    content: "💰"; /* Carteira */
-}
-
-.home-card:nth-of-type(2)::before {
-    content: "🌿"; /* Ganhar RC */
-}
-
-.home-card:nth-of-type(3)::before {
-    content: "📜"; /* Histórico */
-}
-
+/* Ícone RaizCoin nos cartões */
 .home-card::before {
-    font-size: 28px;
+    content: "";
     position: absolute;
     top: -14px;
     right: -14px;
-    background: #A3C9A8;
-    color: white;
+    width: 40px;
+    height: 40px;
+    background-image: url('https://nobremel.github.io/raizcoin.svg');
+    background-size: cover;
+    background-color: #A3C9A8;
     padding: 10px;
     border-radius: 50%;
     box-shadow: 0 3px 6px rgba(0,0,0,0.15);
@@ -130,15 +132,17 @@ nav a:hover::after {
     position: relative;
 }
 
-/* Ícone decorativo padrão (será substituído abaixo) */
+/* Ícone RaizCoin nas missões */
 .missao-info::before {
-    content: "🌱"; /* ícone padrão */
-    font-size: 28px;
+    content: "";
     position: absolute;
     top: -14px;
     right: -14px;
-    background: #A3C9A8;
-    color: white;
+    width: 40px;
+    height: 40px;
+    background-image: url('https://nobremel.github.io/raizcoin.svg');
+    background-size: cover;
+    background-color: #A3C9A8;
     padding: 10px;
     border-radius: 50%;
     box-shadow: 0 3px 6px rgba(0,0,0,0.15);
@@ -171,16 +175,20 @@ footer {
 }
 
 /* ------------------------------
-   🌿 Ícones específicos por missão
+   🌿 Ícones específicos por missão (opcional)
 --------------------------------*/
+
+/* Se quiseres manter os emojis, deixa estes blocos.
+   Se quiseres substituir por RaizCoin, basta remover. */
+
 .missao-info:nth-of-type(1)::before {
-    content: "🌍"; /* Explorar um espaço */
+    /* content: "🌍"; */
 }
 
 .missao-info:nth-of-type(2)::before {
-    content: "🔆"; /* Completar um ritual */
+    /* content: "🔆"; */
 }
 
 .missao-info:nth-of-type(3)::before {
-    content: "⭐"; /* Descoberta especial */
+    /* content: "⭐"; */
 }
