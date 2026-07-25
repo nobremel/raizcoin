@@ -63,13 +63,27 @@ nav a:hover::after {
 --------------------------------*/
 .missao-info {
     background: #ffffff;
-    border: 2px solid #D7E8D4; /* verde pastel */
-    border-radius: 16px;
-    padding: 20px;
-    margin-bottom: 25px;
+    border: 3px solid #D7E8D4; /* verde pastel */
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 30px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
     position: relative;
+
+    /* Moldura ilustrada: folhas + estrelas */
+    background-image:
+        url('https://i.imgur.com/8fYkQmT.png'), /* canto superior esquerdo */
+        url('https://i.imgur.com/8fYkQmT.png'), /* canto superior direito */
+        url('https://i.imgur.com/8fYkQmT.png'), /* canto inferior esquerdo */
+        url('https://i.imgur.com/8fYkQmT.png'); /* canto inferior direito */
+    background-repeat: no-repeat;
+    background-size: 60px 60px;
+    background-position:
+        top left,
+        top right,
+        bottom left,
+        bottom right;
 }
 
 /* Ícone decorativo padrão (será substituído abaixo) */
