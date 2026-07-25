@@ -37,7 +37,7 @@ header h1 {
 /* Ícone RaizCoin maior e centrado */
 header h1::before {
     content: "";
-    width: 64px;   /* dobro do tamanho anterior */
+    width: 64px;
     height: 64px;
     background-image: url('https://nobremel.github.io/raizcoin.svg');
     background-size: cover;
@@ -91,7 +91,12 @@ nav a:hover::after {
     border-radius: 16px;
     padding: 25px;
     margin: 20px 0;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+
+    /* sombra natural */
+    box-shadow:
+        0 4px 8px rgba(0,0,0,0.08),
+        0 8px 20px rgba(0,0,0,0.06);
+
     transition: transform 0.25s ease, box-shadow 0.25s ease;
     position: relative;
     cursor: pointer;
@@ -121,8 +126,10 @@ nav a:hover::after {
 }
 
 .home-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    transform: translateY(-4px);
+    box-shadow:
+        0 6px 12px rgba(0,0,0,0.10),
+        0 12px 28px rgba(0,0,0,0.08);
 }
 
 .home-card h3 {
@@ -146,7 +153,12 @@ nav a:hover::after {
     border-radius: 16px;
     padding: 20px;
     margin-bottom: 25px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+
+    /* sombra natural */
+    box-shadow:
+        0 4px 8px rgba(0,0,0,0.08),
+        0 8px 20px rgba(0,0,0,0.06);
+
     transition: transform 0.25s ease, box-shadow 0.25s ease;
     position: relative;
 }
@@ -175,8 +187,10 @@ nav a:hover::after {
 }
 
 .missao-info:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    transform: translateY(-4px);
+    box-shadow:
+        0 6px 12px rgba(0,0,0,0.10),
+        0 12px 28px rgba(0,0,0,0.08);
 }
 
 .missao-info h3 {
