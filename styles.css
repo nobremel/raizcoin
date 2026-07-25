@@ -72,7 +72,7 @@ nav a:hover::after {
     position: relative;
 }
 
-/* Ícone decorativo */
+/* Ícone decorativo padrão (será substituído abaixo) */
 .missao-info::before {
     content: "🌱"; /* ícone natureza */
     font-size: 28px;
@@ -106,4 +106,26 @@ nav a:hover::after {
 
 /* ------------------------------
    🌿 Rodapé
---------------------------------
+--------------------------------*/
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #6B7F6A;
+    margin-top: 40px;
+}
+
+/* ------------------------------
+   🌿 Ícones específicos por missão
+   (colocado no final para ter prioridade)
+--------------------------------*/
+.missao-info:nth-of-type(1)::before {
+    content: "🌍"; /* Explorar um espaço */
+}
+
+.missao-info:nth-of-type(2)::before {
+    content: "🔆"; /* Completar um ritual */
+}
+
+.missao-info:nth-of-type(3)::before {
+    content: "⭐"; /* Descoberta especial */
+}
