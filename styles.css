@@ -63,34 +63,18 @@ nav a:hover::after {
 --------------------------------*/
 .missao-info {
     background: #ffffff;
-    border: 3px solid #D7E8D4; /* verde pastel */
-    border-radius: 20px;
-    padding: 25px;
-    margin-bottom: 30px;
+    border: 2px solid #D7E8D4; /* verde pastel */
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 25px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
     position: relative;
 }
 
-/* Moldura ilustrada: folhas + estrelas (CSS puro) */
-.missao-info::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 20px;
-    pointer-events: none;
-
-    /* Folhas e estrelas suaves */
-    background:
-        radial-gradient(circle at 10% 10%, #A3C9A8 20%, transparent 40%),
-        radial-gradient(circle at 90% 10%, #F9F871 20%, transparent 40%),
-        radial-gradient(circle at 10% 90%, #F9F871 20%, transparent 40%),
-        radial-gradient(circle at 90% 90%, #A3C9A8 20%, transparent 40%);
-}
-
-/* Ícone decorativo padrão (será substituído abaixo) */
+/* Ícone decorativo */
 .missao-info::before {
-    content: "🌱"; /* ícone natureza */
+    content: "🌱"; /* ícone padrão (será substituído abaixo) */
     font-size: 28px;
     position: absolute;
     top: -14px;
