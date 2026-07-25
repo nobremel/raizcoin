@@ -1,29 +1,43 @@
 /* ------------------------------
    🌿 Natureza Viva — Mundo Raiz
    Layout suave, natural e lúdico
-   Ideal para crianças até 12 anos
 --------------------------------*/
 
-/* Fonte amigável e suave */
 body {
     font-family: 'Nunito', sans-serif;
-    background: #F3F8F2; /* verde muito claro */
-    color: #3E4A3D; /* verde profundo */
+    background: #F3F8F2;
+    color: #3E4A3D;
     margin: 0;
     padding: 0;
 }
 
 /* ------------------------------
-   🌿 Cabeçalho e Navegação
+   🌿 Cabeçalho com ícone RaizCoin
 --------------------------------*/
+
 header {
-    background: #A3C9A8; /* verde suave */
+    background: #A3C9A8;
     padding: 20px;
     text-align: center;
     color: #ffffff;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    position: relative;
 }
 
+/* Ícone oficial RaizCoin no cabeçalho */
+header::before {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    background-image: url('https://nobremel.github.io/raizcoin.svg');
+    background-size: cover;
+}
+
+/* Navegação */
 nav a {
     margin: 0 15px;
     color: #ffffff;
@@ -35,7 +49,7 @@ nav a {
 }
 
 nav a:hover {
-    color: #F9F871; /* amarelo suave */
+    color: #F9F871;
 }
 
 nav a:hover::after {
@@ -52,21 +66,11 @@ nav a:hover::after {
 /* ------------------------------
    🌿 Secção de Informação
 --------------------------------*/
+
 .info-section {
     max-width: 800px;
     margin: 40px auto;
     padding: 20px;
-}
-
-/* ------------------------------
-   🌿 Ícone oficial RaizCoin
---------------------------------*/
-.raizcoin-icon {
-    width: 32px;
-    height: 32px;
-    background-image: url('https://nobremel.github.io/raizcoin.svg');
-    background-size: cover;
-    display: inline-block;
 }
 
 /* ------------------------------
@@ -75,7 +79,7 @@ nav a:hover::after {
 
 .home-card {
     background: #ffffff;
-    border: 2px solid #D7E8D4; /* verde pastel */
+    border: 2px solid #D7E8D4;
     border-radius: 16px;
     padding: 25px;
     margin: 20px 0;
@@ -85,17 +89,24 @@ nav a:hover::after {
     cursor: pointer;
 }
 
-/* Ícone RaizCoin nos cartões */
+/* Ícones nos cartões da página inicial */
+.home-card:nth-of-type(1)::before {
+    content: "💰";
+}
+.home-card:nth-of-type(2)::before {
+    content: "🌿";
+}
+.home-card:nth-of-type(3)::before {
+    content: "📜";
+}
+
 .home-card::before {
-    content: "";
+    font-size: 28px;
     position: absolute;
     top: -14px;
     right: -14px;
-    width: 40px;
-    height: 40px;
-    background-image: url('https://nobremel.github.io/raizcoin.svg');
-    background-size: cover;
-    background-color: #A3C9A8;
+    background: #A3C9A8;
+    color: white;
     padding: 10px;
     border-radius: 50%;
     box-shadow: 0 3px 6px rgba(0,0,0,0.15);
@@ -118,12 +129,12 @@ nav a:hover::after {
 }
 
 /* ------------------------------
-   🌿 Cartões de Missão (Página Ganhar)
+   🌿 Cartões de Missão
 --------------------------------*/
 
 .missao-info {
     background: #ffffff;
-    border: 2px solid #D7E8D4; /* verde pastel */
+    border: 2px solid #D7E8D4;
     border-radius: 16px;
     padding: 20px;
     margin-bottom: 25px;
@@ -132,17 +143,24 @@ nav a:hover::after {
     position: relative;
 }
 
-/* Ícone RaizCoin nas missões */
+/* Ícones das missões */
+.missao-info:nth-of-type(1)::before {
+    content: "🌍";
+}
+.missao-info:nth-of-type(2)::before {
+    content: "🔆";
+}
+.missao-info:nth-of-type(3)::before {
+    content: "⭐";
+}
+
 .missao-info::before {
-    content: "";
+    font-size: 28px;
     position: absolute;
     top: -14px;
     right: -14px;
-    width: 40px;
-    height: 40px;
-    background-image: url('https://nobremel.github.io/raizcoin.svg');
-    background-size: cover;
-    background-color: #A3C9A8;
+    background: #A3C9A8;
+    color: white;
     padding: 10px;
     border-radius: 50%;
     box-shadow: 0 3px 6px rgba(0,0,0,0.15);
@@ -167,28 +185,10 @@ nav a:hover::after {
 /* ------------------------------
    🌿 Rodapé
 --------------------------------*/
+
 footer {
     text-align: center;
     padding: 20px;
     color: #6B7F6A;
     margin-top: 40px;
-}
-
-/* ------------------------------
-   🌿 Ícones específicos por missão (opcional)
---------------------------------*/
-
-/* Se quiseres manter os emojis, deixa estes blocos.
-   Se quiseres substituir por RaizCoin, basta remover. */
-
-.missao-info:nth-of-type(1)::before {
-    /* content: "🌍"; */
-}
-
-.missao-info:nth-of-type(2)::before {
-    /* content: "🔆"; */
-}
-
-.missao-info:nth-of-type(3)::before {
-    /* content: "⭐"; */
 }
