@@ -2,51 +2,49 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema RaizCoin</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
-<header>
-    <h1>Sistema RaizCoin</h1>
-    <nav>
-        <ul>
-            <li><a href="carteira.html">Carteira</a></li>
-            <li><a href="historico.html">Histórico</a></li>
-            <li><a href="ganhardois.html">Ganhar</a></li>
-        </ul>
-    </nav>
-</header>
+    <!-- Cabeçalho -->
+    <header>
+        <h1>Sistema RaizCoin</h1>
+        <nav>
+            <a href="carteira.html">Carteira</a>
+            <a href="historico.html">Histórico</a>
+            <a href="ganhardois.html">Ganhar</a>
+        </nav>
+    </header>
 
-<main>
+    <!-- Secção principal -->
     <section class="info-section">
         <h2>Escolhe o que queres fazer</h2>
-        <p>O RaizCoin é o sistema de energia do Mundo Raiz. Aqui podes ganhar, consultar e acompanhar a tua energia.</p>
+        <p>O RaizCoin é o sistema de energia do Mundo Raiz.</p>
+        <p>Aqui podes ganhar, consultar e acompanhar a tua energia.</p>
 
-        <div class="card-grid">
-            <a class="card" href="carteira.html">
-                <h3>Carteira</h3>
-                <p>Consulta o teu saldo atual.</p>
-            </a>
+        <!-- Cartões da página inicial -->
+        <div class="home-card" onclick="location.href='carteira.html'">
+            <h3>Carteira</h3>
+            <p>Consulta o teu saldo atual.</p>
+        </div>
 
-            <a class="card" href="ganhardois.html">
-                <h3>Ganhar RC</h3>
-                <p>Completa ações e aumenta o teu saldo.</p>
-            </a>
+        <div class="home-card" onclick="location.href='ganhardois.html'">
+            <h3>Ganhar RC</h3>
+            <p>Completa ações e aumenta o teu saldo.</p>
+        </div>
 
-            <a class="card" href="historico.html">
-                <h3>Histórico</h3>
-                <p>Vê todas as ações realizadas.</p>
-            </a>
+        <div class="home-card" onclick="location.href='historico.html'">
+            <h3>Histórico</h3>
+            <p>Vê todas as ações realizadas.</p>
         </div>
     </section>
-</main>
 
-<footer>
-    <p>&copy; 2024 Mundo Raiz</p>
-</footer>
+    <!-- Rodapé -->
+    <footer>
+        © 2024 Mundo Raiz
+    </footer>
 
 </body>
 </html>
