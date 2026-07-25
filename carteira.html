@@ -2,65 +2,62 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carteira — RaizCoin</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
+    <!-- Cabeçalho -->
     <header>
         <h1>Carteira</h1>
         <nav>
             <a href="raizcoin_index.html">Início</a>
-            <a href="carteira.html" class="active">Carteira</a>
             <a href="historico.html">Histórico</a>
             <a href="ganhardois.html">Ganhar</a>
         </nav>
     </header>
 
+    <!-- Secção principal -->
     <section class="info-section">
-        <h2>Saldo Atual</h2>
-        <p id="saldo">A carregar saldo…</p>
+
+        <!-- Cartão do saldo -->
+        <div class="home-card">
+            <h3>Saldo Atual</h3>
+            <p id="saldo">0 RC</p>
+        </div>
+
+        <!-- Cartão dos movimentos -->
+        <div class="home-card">
+            <h3>Movimentos</h3>
+            <ul id="movimentos">
+                <!-- Movimentos serão inseridos aqui pelo JS -->
+            </ul>
+        </div>
+
     </section>
 
+    <!-- Rodapé -->
     <footer>
-        <p>© 2024 Mundo Raiz</p>
+        © 2024 Mundo Raiz
     </footer>
 
-    <!-- Firebase config -->
-    <script src="firebase.js"></script>
+    <!-- Script da carteira -->
+    <script>
+        // Carregar saldo
+        const saldo = localStorage.getItem("raizcoin_saldo") || 0;
+        document.getElementById("saldo").textContent = saldo + " RC";
 
-    <!-- Firebase + leitura do saldo -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, doc, getDoc } 
-            from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        // Carregar movimentos
+        const movimentos = JSON.parse(localStorage.getItem("raizcoin_movimentos") || "[]");
+        const lista = document.getElementById("movimentos");
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyD1JxgT8Qm2W0p4uHkGgkMZpQ0zVvYt1x0",
-            authDomain: "mundoraiz-e8e08.firebaseapp.com",
-            projectId: "mundoraiz-e8e08",
-            storageBucket: "mundoraiz-e8e08.appspot.com",
-            messagingSenderId: "1029384756",
-            appId: "1:1029384756:web:abcdef123456"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        async function carregarSaldo() {
-            const userRef = doc(db, "users", "mario");
-            const snap = await getDoc(userRef);
-
-            const saldo = snap.data().saldo || 0;
-
-            document.getElementById("saldo").innerText = `${saldo} RC`;
-        }
-
-        carregarSaldo();
+        movimentos.forEach(m => {
+            const li = document.createElement("li");
+            li.textContent = m;
+            lista.appendChild(li);
+        });
     </script>
 
 </body>
 </html>
-
