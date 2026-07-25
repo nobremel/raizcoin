@@ -21,20 +21,25 @@ header {
     text-align: center;
     color: #ffffff;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    position: relative;
 }
 
-/* Ícone oficial RaizCoin no cabeçalho */
-header::before {
+/* Ícone integrado no título */
+header h1 {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px; /* espaço entre ícone e texto */
+    justify-content: center;
+}
+
+/* Ícone RaizCoin maior e centrado */
+header h1::before {
     content: "";
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 48px;
-    height: 48px;
+    width: 64px;   /* dobro do tamanho anterior */
+    height: 64px;
     background-image: url('https://nobremel.github.io/raizcoin.svg');
     background-size: cover;
+    background-repeat: no-repeat;
+    display: inline-block;
 }
 
 /* Navegação */
