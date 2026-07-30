@@ -44,5 +44,38 @@
         <p>© 2024 Mundo Raiz</p>
     </footer>
 
+    <!-- Integração da carteira RaizCoin -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AQUI",
+            authDomain: "AQUI",
+            projectId: "AQUI"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function carregarCarteira() {
+            const user = "mario"; // depois podemos tornar dinâmico
+            const ref = doc(db, "users", user);
+            const snap = await getDoc(ref);
+
+            if (snap.exists()) {
+                const dados = snap.data();
+                const saldo = dados.carteira || 0;
+
+                window.localStorage.setItem("raizcoin", saldo);
+
+                const el = document.getElementById("carteiraValor");
+                if (el) el.innerText = saldo;
+            }
+        }
+
+        carregarCarteira();
+    </script>
+
 </body>
 </html>
