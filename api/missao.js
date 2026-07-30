@@ -40,7 +40,7 @@ module.exports = async (req, res) => {
       timestamp: new Date()
     });
 
-  // Atualizar carteira
+  // Incrementar carteira
   await db
     .collection("users")
     .doc(user)
