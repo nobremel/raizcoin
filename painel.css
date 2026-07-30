@@ -1,0 +1,84 @@
+body {
+    background: #111;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+.painel {
+    max-width: 350px;
+    margin: auto;
+    background: #222;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(255, 215, 100, 0.3);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.icon {
+    width: 40px;
+}
+
+.saldo {
+    font-size: 2rem;
+    margin: 10px 0;
+    color: #FFD76A;
+}
+
+#lista-historico {
+    list-style: none;
+    padding: 0;
+}
+
+#lista-historico li {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 5px;
+}
+
+button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px;
+    background: #FFD76A;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #ffea9a;
+}
+
+/* Animação RaizCoin */
+.pulse {
+    animation: pulseAnim 0.8s ease-out;
+}
+
+@keyframes pulseAnim {
+    0% { transform: scale(1); color: #FFD76A; }
+    50% { transform: scale(1.25); color: #ffea9a; }
+    100% { transform: scale(1); color: #FFD76A; }
+}
+
+.rise {
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    color: #FFD76A;
+    opacity: 0;
+    animation: riseAnim 1.2s ease-out forwards;
+}
+
+@keyframes riseAnim {
+    0% { opacity: 1; transform: translate(-50%, -20%); }
+    100% { opacity: 0; transform: translate(-50%, -120%); }
+}
