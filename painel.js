@@ -21,19 +21,32 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-let painelFoiFechadoManualmente = false;
+let manterAberto = false;
+let autoCloseTimer = null;
 
-// Fecho automático inteligente
-setTimeout(() => {
-    if (!painelFoiFechadoManualmente) {
+// Função de fecho automático
+function iniciarFechoAutomatico() {
+    autoCloseTimer = setTimeout(() => {
+        if (!manterAberto) {
+            window.close();
+        }
+    }, 3000); // 3 segundos
+}
+
+// Botão Fechar/Manter
+const btn = document.getElementById("fecharBtn");
+btn.textContent = "Fechar / Manter";
+
+btn.onclick = () => {
+    if (!manterAberto) {
+        // Primeiro clique → cancelar fecho automático
+        manterAberto = true;
+        clearTimeout(autoCloseTimer);
+        btn.textContent = "Fechar";
+    } else {
+        // Segundo clique → fechar
         window.close();
     }
-}, 2000);
-
-// Botão fechar
-document.getElementById("fecharBtn").onclick = () => {
-    painelFoiFechadoManualmente = true;
-    window.close();
 };
 
 // Carregar saldo
@@ -92,5 +105,9 @@ async function carregarHistorico() {
     });
 }
 
-carregarSaldo();
-carregarHistorico();
+// Iniciar tudo
+(async () => {
+    await carregarSaldo();
+    await carregarHistorico();
+    iniciarFechoAutomatico();
+})();
