@@ -11,13 +11,23 @@ if (!admin.apps.length) {
 const db = admin.firestore();
 
 module.exports = async (req, res) => {
-  const { id, user, token } = req.query;
+  const { id, user, token, tipo } = req.query;
   const TOKEN_SECRETO = "RAIZ-SECRETO-2024";
 
   if (token !== TOKEN_SECRETO) {
-    return res.status(403).send("Token inválido");
+    return res.status(403).json({ status: "erro", mensagem: "Token inválido" });
   }
 
+  // Pontos por tipo de missão
+  const pontosPorTipo = {
+    ritual: 10,
+    explorar: 5,
+    descoberta: 20
+  };
+
+  const pontos = pontosPorTipo[tipo] || 0;
+
+  // Registar missão
   await db
     .collection("users")
     .doc(user)
@@ -25,8 +35,23 @@ module.exports = async (req, res) => {
     .doc(id)
     .set({
       cumprida: true,
+      tipo,
+      pontos,
       timestamp: new Date()
     });
 
-  return res.status(200).send("Missão registada com sucesso");
-}; 
+  // Atualizar carteira
+  await db
+    .collection("users")
+    .doc(user)
+    .set(
+      { carteira: admin.firestore.FieldValue.increment(pontos) },
+      { merge: true }
+    );
+
+  return res.status(200).json({
+    status: "ok",
+    mensagem: "Missão registada",
+    pontos
+  });
+};
