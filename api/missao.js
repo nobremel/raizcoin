@@ -27,20 +27,42 @@ module.exports = async (req, res) => {
 
   const pontos = pontosPorTipo[tipo] || 0;
 
-  // Registar missão
-  await db
+  const missaoRef = db
     .collection("users")
     .doc(user)
     .collection("missoes")
-    .doc(id)
-    .set({
-      cumprida: true,
-      tipo,
-      pontos,
-      timestamp: new Date()
-    });
+    .doc(id);
 
-  // Incrementar carteira
+  const missaoSnap = await missaoRef.get();
+
+  // ✔️ Se a missão já existe, verificar cooldown
+  if (missaoSnap.exists) {
+    const dados = missaoSnap.data();
+    const ultimaVez = dados.timestamp.toDate();
+    const agora = new Date();
+
+    const diffMinutos = (agora - ultimaVez) / (1000 * 60);
+
+    // ✔️ Cooldown de 5 minutos
+    if (diffMinutos < 5) {
+      return res.status(200).json({
+        status: "cooldown",
+        mensagem: "Missão repetida demasiado rápido",
+        minutosRestantes: Math.ceil(5 - diffMinutos),
+        pontos: 0
+      });
+    }
+  }
+
+  // ✔️ Registar missão (primeira vez ou após cooldown)
+  await missaoRef.set({
+    cumprida: true,
+    tipo,
+    pontos,
+    timestamp: new Date()
+  });
+
+  // ✔️ Incrementar carteira
   await db
     .collection("users")
     .doc(user)
