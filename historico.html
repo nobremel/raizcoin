@@ -34,12 +34,15 @@
         <p>© 2024 Mundo Raiz</p>
     </footer>
 
-    <script src="firebase.js"></script>
-
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, getDocs, orderBy, query } 
-            from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { 
+            getFirestore, 
+            collection, 
+            getDocs, 
+            orderBy, 
+            query 
+        } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyD1JxgT8Qm2W0p4uHkGgkMZpQ0zVvYt1x0",
@@ -54,7 +57,7 @@
         const db = getFirestore(app);
 
         async function carregarHistorico() {
-            const historicoRef = collection(db, "users", "mario", "historico");
+            const historicoRef = collection(db, "users", "mario", "missoes");
             const q = query(historicoRef, orderBy("timestamp", "desc"));
 
             const snap = await getDocs(q);
@@ -71,16 +74,21 @@
 
             snap.forEach(doc => {
                 const dados = doc.data();
-                const valor = dados.valor;
                 const tipo = dados.tipo;
+                const pontos = dados.pontos;
                 const data = dados.timestamp.toDate();
+
+                const nomes = {
+                    ritual: "Ritual concluído",
+                    explorar: "Exploração de espaço",
+                    descoberta: "Descoberta especial"
+                };
 
                 const item = document.createElement("li");
                 item.innerHTML = `
-                    <strong>${tipo === "ganho" ? "Ganho" : "Movimento"}</strong>:
-                    +${valor} RC  
-                    <br>
-                    <span class="data">${data.toLocaleString("pt-PT")}</span>
+                    <strong>${nomes[tipo] || "Missão"}</strong><br>
+                    <span class="data">${data.toLocaleString("pt-PT")}</span><br>
+                    <span class="pontos">+${pontos} RC</span>
                 `;
                 lista.appendChild(item);
             });
